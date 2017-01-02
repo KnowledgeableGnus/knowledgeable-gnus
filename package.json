@@ -1,0 +1,22 @@
+{
+  "name": "knowledgeable-gnus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevegraves/knowledgeable-gnus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevegraves/knowledgeable-gnus/issues"
+  },
+  "homepage": "https://github.com/stevegraves/knowledgeable-gnus#readme",
+  "dependencies": {
+    "mysql": "^2.12.0"
+  }
+}
