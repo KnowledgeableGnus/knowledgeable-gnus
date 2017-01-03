@@ -50,7 +50,7 @@ CREATE TABLE `coordinates` (
 DROP TABLE IF EXISTS `locations`;
     
 CREATE TABLE `locations` (
-  `id` INTEGER NULL AUTO_INCREMENT,
+  `id` INTEGER AUTO_INCREMENT,
   `id_users` INTEGER,
   `name` VARCHAR(60),
   `lat` DECIMAL(10, 6),
