@@ -19,7 +19,7 @@ module.exports = {
         if (err) {
           console.log('error: ', err);
         }
-        res.send(201);
+        res.sendStatus(201);
       });
     }
   },
@@ -39,7 +39,7 @@ module.exports = {
         if (err) {
           console.log('error: ', err);
         }
-        res.send(201);
+        res.sendStatus(201);
       });
     }
   },
@@ -59,7 +59,7 @@ module.exports = {
         if (err) {
           console.log('error: ', err);
         }
-        res.send(201);
+        res.sendStatus(201);
       })
     }
   }
