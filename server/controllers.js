@@ -24,7 +24,7 @@ module.exports = {
   },
   coordinates: {
     get: function(req, res) {
-      var params = [req.body.id_users];
+      var params = [req.query.id_users];
       models.coordinates.get(params, function(err, results) {
         if (err) {
           console.log('error: ', err);
@@ -44,7 +44,7 @@ module.exports = {
   },
   locations: {
     get: function (req, res) {
-      var params = [req.body.id_users];
+      var params = [req.query.id_users];
       models.locations.get(params, function(err, results) {
         if (err) {
           console.log('error: ', err);
