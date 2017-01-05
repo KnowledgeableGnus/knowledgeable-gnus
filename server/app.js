@@ -13,10 +13,11 @@ app.set('port', 3000);
 app.use(parser.json());
 app.use(morgan('dev'));
 
-//where does this go???
-//app.use('/???', router);
+app.use('/', router);
 
 //set up for when there are static files
 //app.use(express.static(__dirname, '..', /client));
+
+app.listen(app.get('port'));
 
 module.exports.app = app;
