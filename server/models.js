@@ -18,8 +18,8 @@ module.exports = {
   },
 
   coordinates: {
-     get: function(callback) {
-      var queryStr = 'SELECT coordinates.lat, coordinates.lng FROM coordinates WHERE coordinates.id_users = ?';
+     get: function(params, callback) {
+      var queryStr = 'SELECT lat, lng FROM coordinates WHERE id_users = ?';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
@@ -33,7 +33,7 @@ module.exports = {
   },
 
   locations: {
-     get: function(callback) {
+     get: function(params, callback) {
       var queryStr = 'SELECT * FROM locations WHERE id_users = ?';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
