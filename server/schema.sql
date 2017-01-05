@@ -5,7 +5,7 @@
 -- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- SET FOREIGN_KEY_CHECKS=0;
 
-CREATE DATABASE routend;
+--CREATE DATABASE routend;
 
 USE routend;
 
@@ -53,6 +53,7 @@ CREATE TABLE `locations` (
   `id` INTEGER AUTO_INCREMENT,
   `id_users` INTEGER,
   `name` VARCHAR(60),
+  `category` VARCHAR(60),
   `lat` DECIMAL(10, 6),
   `lng` DECIMAL(10, 6),
   PRIMARY KEY (`id`)

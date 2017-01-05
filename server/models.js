@@ -40,7 +40,7 @@ module.exports = {
       });
     },
     post: function (params, callback) {
-      var queryStr = 'INSERT INTO locations(id_users, name, lat, lng) VALUE (?, ?, ?, ?)';
+      var queryStr = 'INSERT INTO locations(id_users, name, category, lat, lng) VALUE (?, ?, ?, ?, ?)';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });

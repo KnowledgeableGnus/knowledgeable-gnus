@@ -53,7 +53,7 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      var params = [req.body.id_users, req.body.name, req.body.lat, req.body.lng];
+      var params = [req.body.id_users, req.body.name, req.body.category, req.body.lat, req.body.lng];
       models.locations.post(params, function(err, results) {
         if (err) {
           console.log('error: ', err);
