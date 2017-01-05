@@ -19,7 +19,7 @@ module.exports = {
 
   coordinates: {
      get: function(params, callback) {
-      var queryStr = 'SELECT lat, lng FROM coordinates WHERE id_users = ?';
+      var queryStr = 'SELECT time, lat, lng FROM coordinates WHERE id_users = ?';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
