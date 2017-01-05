@@ -1,4 +1,5 @@
 var models = require('./models.js');
+var geo = require('geo-helpers');
 
 module.exports = {
 
@@ -61,6 +62,23 @@ module.exports = {
         res.send(201);
       })
     }
+  }
+
+  locationTime: function(req, res) {
+    var params = [req.body.id_users];
+      models.locations.get(params, function(err, results) {
+        if (err) {
+          console.log('error: ', err);
+        }
+        
+        for (var i = 0; i < results.length; i++) {
+          if (geo.findGeodesic()) {
+            
+          }
+        }
+
+      });
+
   }
 
 };
