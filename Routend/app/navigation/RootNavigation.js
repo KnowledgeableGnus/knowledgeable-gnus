@@ -32,7 +32,8 @@ export default class RootNavigation extends React.Component {
   render() {
     return (
       <TabNavigation
-        tabBarHeight={56}
+        tabBarHeight={40}
+        tabBarColor="#25272A"
         initialTab="home">
         <TabNavigationItem
           id="home"
@@ -63,7 +64,7 @@ export default class RootNavigation extends React.Component {
     return (
       <FontAwesome
         name={name}
-        size={32}
+        size={23}
         color={isSelected ? Colors.tabIconSelected : Colors.tabIconDefault}
       />
     );
