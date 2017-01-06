@@ -16,7 +16,7 @@ app.use(morgan('dev'));
 app.use('/', router);
 
 app.get('/', function(req, res) {
-  res.send('Welcome to Routend buddy!');
+  res.send('Welcome to Routend');
 })
 
 //set up for when there are static files
