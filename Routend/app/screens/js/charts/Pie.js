@@ -112,6 +112,7 @@ class Pie extends React.Component {
            {
               this.props.data.map( (item, index) =>
               (<AnimShape
+                 choosePiece={() => {this._onPieItemSelected(index).bind(this)}}
                  key={'pie_shape_' + index}
                  color={this._color(index)}
                  d={ () => this._createPieChart(index)}

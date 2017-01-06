@@ -21,7 +21,8 @@ import { Kohana } from 'react-native-textinput-effects';
 import {
   FontAwesome,
 } from '@exponent/vector-icons';
-import Button from 'apsl-react-native-button';
+// import Button from 'apsl-react-native-button';
+import { Button } from 'react-native-elements'
 
 class FriendsList extends React.Component {
   constructor(props) {
@@ -202,9 +203,13 @@ class FriendsList extends React.Component {
             inputStyle={{ color: '#91627b' }}
           />
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <Button onPress={() => { this.props.navigator.push(Router.getRoute('home'))}}style={{backgroundColor: '#fafafa', top: 7, left: (Dimensions.get('window').width * 0.3), height: 35, width: 100, borderRadius: 1, borderColor: '#d3d3d3'}} textStyle={{fontSize: 10}}>
-            SUBMIT
-            </Button>
+          <Button
+  raised
+  icon={{name: 'cached'}}
+  backgroundColor={'#A5A7AA'}
+  fontSize={10}
+  buttonStyle={{top: 5, borderRadius: 2, height: 30}}
+  title='SUBMIT' />
           </View>
         </View>
 
@@ -213,6 +218,12 @@ class FriendsList extends React.Component {
   }
 
 }
+
+/*
+            <Button onPress={() => { this.props.navigator.push(Router.getRoute('home'))}}style={{backgroundColor: '#fcfcfc', top: 7, left: (Dimensions.get('window').width * 0.3), height: 35, width: 100, borderRadius: 2, borderColor: '#d3d3d3', shadowColor: '#000000', shadowRadius: 0.05, shadowOpacity: 0.6, shadowOffset: {height: 1, width: 2}}} textStyle={{fontSize: 10, fontWeight: 'bold'}}>
+            SUBMIT
+            </Button>
+            */
 
 const styles = StyleSheet.create({
   container: {

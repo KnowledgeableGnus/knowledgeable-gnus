@@ -6,12 +6,63 @@ import {
 import {
   ExponentConfigView,
 } from '@exponent/samples';
+import { List, ListItem } from 'react-native-elements';
+import { Font } from 'exponent';
+
+const list2 = [
+  {
+    title: 'General',
+    icon: 'av-timer'
+  },
+  {
+    title: 'Edit Profile',
+    icon: 'flight-takeoff'
+  },
+  {
+    title: 'Notifications',
+    icon: 'av-timer'
+  },
+  {
+    title: 'Data',
+    icon: 'flight-takeoff'
+  },
+  {
+    title: 'Help Center',
+    icon: 'av-timer'
+  },
+  {
+    title: 'Report a Problem',
+    icon: 'flight-takeoff'
+  },
+]
 
 export default class SettingsScreen extends React.Component {
+  // state = {
+  //   fontLoaded: false,
+  // };
+
   static route = {
     navigationBar: {
-      title: 'exp.json'
+      title: 'Settings'
     },
+  }
+
+  // componentDidMount() {
+  //   Font.loadAsync({
+  //     'space-mono': require('../containers/assets/fonts/SpaceMono-Regular.ttl'),
+  //   });
+  // }
+
+  renderRow (rowData, sectionID) {
+  return (
+    <ListItem
+      roundAvatar
+      key={sectionID}
+      title={rowData.name}
+      subtitle={rowData.subtitle}
+      avatar={{uri:rowData.avatar_url}}
+    />
+  )
   }
 
   render() {
@@ -19,11 +70,17 @@ export default class SettingsScreen extends React.Component {
       <ScrollView
         style={styles.container}
         contentContainerStyle={this.props.route.getContentContainerStyle()}>
-
-        { /* Go ahead and delete ExponentConfigView and replace it with your
-           * content, we just wanted to give you a quick view of your config */ }
-        <ExponentConfigView />
-
+        <List>
+          {
+            list2.map((item, i) => (
+              <ListItem
+                key={i}
+                title={item.title}
+                leftIcon={{name: item.icon}}
+              />
+            ))
+          }
+        </List>
       </ScrollView>
     );
   }

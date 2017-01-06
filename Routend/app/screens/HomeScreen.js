@@ -17,6 +17,8 @@ import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
 import Button from 'apsl-react-native-button';
 import Router from '../navigation/Router';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -41,9 +43,10 @@ class HomeScreen extends React.Component {
 
   componentWillMount() {
     this._setPosition();
-    this.test = this.props.polylines.map(function(item) {
-      return item.coordinates;
-    });
+    console.log(this.props);
+    // this.test = this.props.polylines.map(function(item) {
+    //   return item.coordinates;
+    // });
 
   }
 
@@ -97,11 +100,11 @@ class HomeScreen extends React.Component {
           <Components.MapView.Polyline
           coordinates={this.test}
           strokeWidth={3}
-          strokeColor={'#000'}
+          strokeColor={'#b2b2ff'}
           />
       </Components.MapView.Animated>
 
-      <View style={{flex: 1.2, position: 'absolute', zIndex: 1, top: (Dimensions.get('window').height * 0.705)}}>
+      <View style={{flex: 1.2, position: 'absolute', zIndex: 1, top: (Dimensions.get('window').height * 0.686)}}>
         <View style={{justifyContent: 'center', flexDirection: 'row', backgroundColor: '#fcfcfc', width: (Dimensions.get('window').width * 0.92), height: (Dimensions.get('window').height * 0.10), borderRadius: 2, left: (Dimensions.get('window').width * 0.04), borderWidth: 0.8, borderColor: '#d3d3d3', opacity: 0.97}}>
         <DatePicker
             style={{height: 2000, width: 118, right: 8, top: (Dimensions.get('window').height * 0.015)}}
@@ -143,9 +146,13 @@ class HomeScreen extends React.Component {
 }
 
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
 function mapStateToProps(state) {
   return {
-    polylines: state.today
+    AppState: state
   }
 }
 

@@ -27,7 +27,9 @@ export const testCount = createReducer({}, {
   ['TEST'](state, action){
     console.log('action', action)
     console.log('action.test', action.test);
-    return action.test.rates;
+    return action.test.map(function(value) {
+        return {coordinates: {latitude: value.lat, logitude: value.lng}}
+    })
   }
 });
 

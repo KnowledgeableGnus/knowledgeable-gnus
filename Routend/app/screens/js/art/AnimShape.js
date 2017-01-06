@@ -5,6 +5,7 @@ import React from 'react';
 import {
   ART,
   LayoutAnimation,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 const {
@@ -132,11 +133,14 @@ export default class AnimShape extends React.Component {
   render() {
     const path = this.state.path;
     return (
+      <TouchableWithoutFeedback onPress={() => {this.props.choosePiece()}}>
        <Shape
          d={path}
          stroke={this.props.color}
          fill={this.props.color}
          />
+         </TouchableWithoutFeedback>
+
     );
   }
 }

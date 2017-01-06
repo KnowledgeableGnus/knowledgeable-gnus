@@ -55,7 +55,7 @@ class AppContainer extends Component {
       return (
         <View style={styles.container}>
           <NavigationProvider router={Router}>
-            <StackNavigation id="root" initialRoute={Router.getRoute('rootNavigation')} />
+            <StackNavigation id="root" initialRoute={Router.getRoute('login')} />
           </NavigationProvider>
 
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}

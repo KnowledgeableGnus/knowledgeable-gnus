@@ -19,7 +19,7 @@ export function fetchRecipes(ingredients) {
 
 export function fetchCoord(location) {
   return (dispatch, getState) => {
-    return fetch('http://api.fixer.io/latest')
+    return fetch('http://107.170.226.9:3000/coordinates?id_users=1')
     .then((resp) => resp.json())
     .then(resp => {
       console.log('api respon', resp);
