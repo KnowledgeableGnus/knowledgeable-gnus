@@ -92,6 +92,7 @@ class FriendsList extends React.Component {
           //   currentAddress: details.name + ', Neighborhood: ' + details.address_components[2].short_name
           // });
           var currentLocation = '';
+          var that = this;
           if (data.description === undefined) {
             currentLocation = data.formatted_address;
           }
@@ -99,14 +100,39 @@ class FriendsList extends React.Component {
             currentLocation = data.description;
           }
 
+          if (details.photos !== undefined && details.photos[0].photo_reference !== undefined) {
+          var photo = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + details.photos[0].photo_reference + '&key=AIzaSyCQiHH0c64tBC6zOlwm7ViYpCulVVtSuSU'
+          fetch(photo)
+          .done(function(data) {
+            console.log('data from google places image fetch', data);
+                that.setState({
+                    results:
+                    (
+                        <View style={{marginLeft: 20, marginRight: 15}}>
+                          <Card
+                            onPress={() => console.log('card pressed')}
+                            title={'Location'}
+                            src={data.url}
+                            link={currentLocation}
+                            radius={5}
+                            marginBottom={0}
+                            style={{marginTop: 1}}
+                          />
+                        </View>
+                     )
+              });
+            });
+          }
+
+
           this.setState({
             results:
             (
                 <View style={{marginLeft: 20, marginRight: 15}}>
                   <Card
                     onPress={() => console.log('card pressed')}
-                    src={'https://media.glassdoor.com/o/4b/53/8c/d2/view-from-our-london-office-heron-tower.jpg'}
                     title={'Location'}
+                    src={'http://searchengineland.com/figz/wp-content/seloads/2014/08/local-search-map-pin-ss-1920-800x450.jpg'}
                     link={currentLocation}
                     radius={5}
                     marginBottom={0}
@@ -184,23 +210,23 @@ class FriendsList extends React.Component {
       <View style={[styles.card2, { backgroundColor: '#fff' }]}>
           <Text style={styles.title}>Save Location</Text>
           <Kohana
-            style={{ backgroundColor: '#f9f5ed' }}
+            style={{ backgroundColor: '#f7f7f7' }}
             label={'Name'}
             iconClass={FontAwesome}
             iconName={'circle-o-notch'}
             iconColor={'#f4d29a'}
-            labelStyle={{ color: '#91627b' }}
-            inputStyle={{ color: '#91627b' }}
+            labelStyle={{ color: '#626262'}}
+            inputStyle={{ color: '#000', fontSize: 14}}
           />
           <Kohana
-            style={[styles.input, { backgroundColor: '#f9f5ed' }]}
+            style={[styles.input, { backgroundColor: '#f7f7f7' }]}
             label={'Category'}
             iconClass={FontAwesome}
             iconName={'archive'}
             iconColor={'#ddd'}
             iconColor={'#f4d29a'}
-            labelStyle={{ color: '#91627b' }}
-            inputStyle={{ color: '#91627b' }}
+            labelStyle={{ color: '#626262' }}
+            inputStyle={{ color: '#000', fontSize: 14}}
           />
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Button
