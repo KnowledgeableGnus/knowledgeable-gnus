@@ -1,5 +1,6 @@
 var express = require('express');
 var db = require('./db');
+var controller = require('./controllers');
 
 var parser = require('body-parser');
 var morgan = require('morgan');
@@ -21,5 +22,8 @@ app.use('/', router);
 app.listen(app.get('port'));
 console.log('Running on port ' + app.get('port'));
 
+
+//Uncomment to fill database with dummy data on server start
+//controller.mockData(37.773972, -122.431297, 1483812798)
 
 module.exports.app = app;
