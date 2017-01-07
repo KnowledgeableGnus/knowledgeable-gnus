@@ -61,7 +61,7 @@ export default class LinksScreen extends React.Component {
     return (
       <ScrollView>
         <View style={styles.container} >
-          <Text style={styles.chart_title}>Time spent today</Text>
+          <Text style={styles.chart_title}>Time Spent Today</Text>
           <Pie
             pieWidth={150}
             pieHeight={150}
@@ -70,7 +70,7 @@ export default class LinksScreen extends React.Component {
             width={width}
             height={height}
             data={data.spendingsLastMonth} />
-          <Text style={styles.chart_title}>Time spent per day in {data.spendingsLastMonth[this.state.activeIndex].name}</Text>
+          <Text style={styles.chart_title}>Time Spent Per Day in {data.spendingsLastMonth[this.state.activeIndex].name}</Text>
           <AreaSpline
             width={width}
             height={height}
@@ -92,9 +92,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingBottom: 5,
     paddingLeft: 5,
-    fontSize: 18,
+    fontSize: 14,
     backgroundColor:'white',
-    color: 'grey',
+    color: '#404d5b',
+    opacity: 0.8,
     fontWeight:'bold',
   }
 });

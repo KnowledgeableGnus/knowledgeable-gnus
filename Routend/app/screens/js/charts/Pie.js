@@ -146,7 +146,7 @@ const styles = {
     margin: 20,
   },
   label: {
-    fontSize: 15,
+    fontSize: 14,
     marginTop: 5,
     fontWeight: 'normal',
   }

@@ -44,7 +44,7 @@ type Props = {
   data: any
 };
 
-const margin = 20;
+const margin = 15;
 const AnimationDurationMs = 250;
 
 class AreaSpline extends React.Component {
