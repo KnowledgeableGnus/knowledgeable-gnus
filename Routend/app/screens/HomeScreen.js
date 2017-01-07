@@ -161,7 +161,7 @@ class HomeScreen extends React.Component {
               }
           />
 
-          <Text style={{top: (Dimensions.get('window').height * 0.026), fontSize: 20, color: '#a8a8a8'}}> | </Text>
+          <Text style={{top: (Dimensions.get('window').height * 0.026), fontSize: 20, fontWeight: '100',color: '#545454'}}> | </Text>
 
           <Button onPress={() => { this.props.navigator.push(Router.getRoute('tracklocation')) }} style={{backgroundColor: '#fcfcfc', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 0, borderWidth: 0}} textStyle={{fontSize: 12}}>
             Track a Place
