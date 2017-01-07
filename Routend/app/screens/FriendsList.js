@@ -22,7 +22,8 @@ import {
   FontAwesome,
 } from '@exponent/vector-icons';
 // import Button from 'apsl-react-native-button';
-import { Button } from 'react-native-elements'
+import { Button } from 'react-native-uikit';
+import { Card } from 'react-native-uikit';
 
 class FriendsList extends React.Component {
   constructor(props) {
@@ -76,15 +77,6 @@ class FriendsList extends React.Component {
         style={styles.container}
         contentContainerStyle={this.props.route.getContentContainerStyle()}>
 
-        <View>
-        <TouchableHighlight onPress={ () => this.searchPressed() }>
-        <Text>Fetch</Text>
-        </TouchableHighlight>
-        </View>
-        <View>
-        <Text>Count: {this.props.AppState.recipeCount}</Text>
-        <Text style={styles.title}>Search Location</Text>
-        </View>
        <GooglePlacesAutocomplete
         // onChangeText={() => {this.setState({results: (<View></View>) })}}
         placeholder='Search'
@@ -109,12 +101,19 @@ class FriendsList extends React.Component {
 
           this.setState({
             results:
-            (<View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row', backgroundColor: '#fcfcfc', width: (Dimensions.get('window').width * 0.92), height: (Dimensions.get('window').height * 0.10), borderRadius: 1, left: (Dimensions.get('window').width * 0.04), borderWidth: 0.8, borderColor: '#d3d3d3', opacity: 1}}>
+            (
                 <View style={{marginLeft: 20, marginRight: 15}}>
-                  <Text style={{fontWeight: 'bold'}}>Location:</Text>
-                  <Text>{currentLocation}</Text>
+                  <Card
+                    onPress={() => console.log('card pressed')}
+                    src={'https://media.glassdoor.com/o/4b/53/8c/d2/view-from-our-london-office-heron-tower.jpg'}
+                    title={'Location'}
+                    link={currentLocation}
+                    radius={5}
+                    marginBottom={0}
+                    style={{marginTop: 1}}
+                  />
                 </View>
-             </View>)
+             )
     });
         }}
         getDefaultValue={() => {
@@ -134,6 +133,7 @@ class FriendsList extends React.Component {
             backgroundColor: '#fafafa',
             borderTopColor: '#fcfcfc',
             borderBottomColor: '#fcfcfc',
+            bottom: 15,
             // borderTopWidth: 0.1,
             // borderBottomWidth: 0.1,
           },
@@ -203,13 +203,13 @@ class FriendsList extends React.Component {
             inputStyle={{ color: '#91627b' }}
           />
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Button
-  raised
-  icon={{name: 'cached'}}
-  backgroundColor={'#A5A7AA'}
-  fontSize={10}
-  buttonStyle={{top: 5, borderRadius: 2, height: 30}}
-  title='SUBMIT' />
+            <Button
+              color={'#fff'}
+              backgroundColor={'#0094EA'}
+              style={{top: 5, width: (Dimensions.get('window').width * 0.9)}}
+              radius={5}>
+              Submit
+            </Button>
           </View>
         </View>
 
@@ -265,3 +265,13 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendsList);
+
+// <View>
+//         <TouchableHighlight onPress={ () => this.searchPressed() }>
+//         <Text>Fetch</Text>
+//         </TouchableHighlight>
+//         </View>
+//         <View>
+//         <Text>Count: {this.props.AppState.recipeCount}</Text>
+//         <Text style={styles.title}>Search Location</Text>
+//         </View>

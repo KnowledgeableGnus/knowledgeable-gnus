@@ -13,6 +13,7 @@ import {
 import { List, ListItem } from 'react-native-elements';
 import { LoginForm } from 'react-native-uikit';
 import Router from '../navigation/Router';
+import { LoginFb } from 'react-native-uikit'
 
 export default class Login extends React.Component {
   static route = {
@@ -40,18 +41,22 @@ export default class Login extends React.Component {
         <View style={{flex: 1, backgroundColor: 'black'}}></View>
           <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center'}}><Text>Routend Logo</Text></View>
             <View style={{flex: 1, backgroundColor: 'black'}}></View>
-          <View style={{flex: 1.2, justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{flex: 1.8, justifyContent: 'center', alignItems: 'center'}}>
               <LoginForm
               loginFb={() => console.log('login with facebook')}
               onSubmit={(email, password) => this.props.navigator.push(Router.getRoute('rootNavigation'))}
               error={false}
               errorMsg={'username or password incorrect'}
-              style={{marginTop: 0}}
+              style={{marginTop: 30}}
               radius={0}
               inputStyle={{height: 34, width: (Dimensions.get('window').width * 0.9), fontSize: 12}}
               usernameStyle={{bottom: -10, borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomLeftRadius: 0, borderBottomRightRadius: 0}}
               passwordStyle={{borderTopLeftRadius: 0, borderTopRightRadius: 0,}}
               btnStyle={{bottom: 12,}}
+              />
+              <LoginFb
+              onPress={() => console.log('login with fb')}
+              style={{bottom: 20}}
               />
           </View>
         <View style={{flex: 1.3, backgroundColor: 'black'}}></View>
