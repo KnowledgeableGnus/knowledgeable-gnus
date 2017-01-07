@@ -17,14 +17,32 @@ export function fetchRecipes(ingredients) {
   }
 }
 
-export function fetchCoord(location) {
+export function fetchCoord(location, userid) {
   return (dispatch, getState) => {
-    return fetch('http://107.170.226.9:3000/coordinates?id_users=1')
+    return fetch('http://107.170.226.9:3000/coordinates?id_users=1&start=2017-01-06&end=2017-01-07')
     .then((resp) => resp.json())
     .then(resp => {
       console.log('api respon', resp);
       dispatch(testy({test: resp}));
     })
+  }
+}
+
+export function fetchPlaces(location,userid) {
+  return (dispatch, getState) => {
+    return fetch('http://107.170.226.9:3000/locations?id_users=1')
+    .then((resp) => resp.json())
+    .then(resp => {
+      console.log('api respon', resp);
+      dispatch(getPlaces({places: resp}));
+    })
+  }
+}
+
+export function getPlaces({ places }) {
+  return {
+    type: types.GET_PLACES,
+    places
   }
 }
 

@@ -42,14 +42,14 @@ export default class RootNavigation extends React.Component {
         </TabNavigationItem>
 
         <TabNavigationItem
-          id="links"
+          id="stats"
           renderIcon={isSelected => this._renderIcon('user-circle', isSelected)}>
-          <StackNavigation initialRoute="links" />
+          <StackNavigation initialRoute="stats" />
         </TabNavigationItem>
         <TabNavigationItem
-          id="friendslist"
+          id="tracklocation"
           renderIcon={isSelected => this._renderIcon('feed', isSelected)}>
-          <StackNavigation initialRoute="friendslist" />
+          <StackNavigation initialRoute="tracklocation" />
         </TabNavigationItem>
         <TabNavigationItem
           id="social"

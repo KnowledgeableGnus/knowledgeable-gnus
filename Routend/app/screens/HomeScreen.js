@@ -47,8 +47,7 @@ class HomeScreen extends React.Component {
   componentWillMount() {
     var that = this;
     this._setPosition();
-    this.props.fetchCoord().then(function() {
-    })
+    this.props.fetchCoord()
     .done(function() {
       that.currentData = [];
       for (var i = 0; i < that.props.lines.length; i++) {
@@ -57,9 +56,17 @@ class HomeScreen extends React.Component {
       that.test = that.currentData.map(function(item) {
       return item.coordinates;
       });
-      that.setState({
-        ready: true,
-      });
+      console.log('that.test', that.test)
+      that.props.fetchPlaces().done(function() {
+        that.tracked = [];
+        for (var i = 0; i < that.props.places.length; i++) {
+          that.tracked.push({id: that.props.places[i].id, name: that.props.places[i].name, category: that.props.places[i].category, coordinates: {latitude: that.props.places[i].lat, longitude: that.props.places[i].lng}});
+        }
+        that.setState({
+          ready: true,
+        });
+        console.log('that.tracked', that.tracked)
+      })
     });
 
   }
@@ -107,12 +114,12 @@ class HomeScreen extends React.Component {
               showsCompass={true}
               >
 
-            {this.currentData.map(marker =>
+            {this.tracked.map(marker =>
               <Components.MapView.Marker
                 key={marker.id}
                 coordinate={marker.coordinates}
-                title={'test'}
-                description={'test'}
+                title={marker.name}
+                description={'Category: ' + marker.category}
               />
             )}
 
@@ -156,7 +163,7 @@ class HomeScreen extends React.Component {
 
           <Text style={{top: (Dimensions.get('window').height * 0.026), fontSize: 20, color: '#a8a8a8'}}> | </Text>
 
-          <Button onPress={() => { this.props.navigator.push(Router.getRoute('friendslist')) }} style={{backgroundColor: '#fcfcfc', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 0, borderWidth: 0}} textStyle={{fontSize: 12}}>
+          <Button onPress={() => { this.props.navigator.push(Router.getRoute('tracklocation')) }} style={{backgroundColor: '#fcfcfc', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 0, borderWidth: 0}} textStyle={{fontSize: 12}}>
             Track a Place
           </Button>
         </View>
@@ -178,6 +185,7 @@ function mapStateToProps(state) {
   return {
     polylines: state.today,
     lines: state.testCount,
+    places: state.trackedPlaces,
   }
 }
 

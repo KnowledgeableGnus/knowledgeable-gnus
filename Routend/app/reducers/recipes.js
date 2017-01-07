@@ -20,6 +20,12 @@ export const recipeCount = createReducer(0, {
   }
 });
 
+export const trackedPlaces = createReducer([], {
+    [types.GET_PLACES](state, action) {
+        return action.places;
+    }
+});
+
 export const testCount = createReducer([], {
   // [types.SET_SEARCHED_RECIPES](state, action) {
   //   return action.recipes.length;

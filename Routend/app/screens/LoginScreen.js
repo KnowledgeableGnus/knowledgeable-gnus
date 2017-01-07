@@ -62,7 +62,7 @@ export default class Login extends React.Component {
               />
           </View>
         <View style={{flex: 1.3, backgroundColor: 'grey', alignItems: 'center', top: 10}}>
-          <TouchableOpacity onPress={() => { console.log('Create an account') }}><Text style={{fontSize: 12.3}}>Create an Account</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => { this.props.navigator.push(Router.getRoute('signup')) }}><Text style={{fontSize: 12.3}}>Create an Account</Text></TouchableOpacity>
         </View>
       </View>
     );

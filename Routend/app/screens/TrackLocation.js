@@ -25,7 +25,7 @@ import {
 import { Button } from 'react-native-uikit';
 import { Card } from 'react-native-uikit';
 
-class FriendsList extends React.Component {
+class TrackLocation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -186,7 +186,7 @@ class FriendsList extends React.Component {
         }}
 
         currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
-        currentLocationLabel="Current location"
+        currentLocationLabel="Current Location"
         nearbyPlacesAPI='GoogleReverseGeocoding' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
         GoogleReverseGeocodingQuery={{
           // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
@@ -290,7 +290,7 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FriendsList);
+export default connect(mapStateToProps, mapDispatchToProps)(TrackLocation);
 
 // <View>
 //         <TouchableHighlight onPress={ () => this.searchPressed() }>

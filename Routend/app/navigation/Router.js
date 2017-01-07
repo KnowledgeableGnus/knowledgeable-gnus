@@ -3,19 +3,21 @@ import {
 } from '@exponent/ex-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import StatsScreen from '../screens/StatsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import RootNavigation from './RootNavigation';
-import FriendsList from '../screens/FriendsList';
+import TrackLocation from '../screens/TrackLocation';
 import Social from '../screens/SocialScreen';
 import Login from '../screens/LoginScreen';
+import SignupScreen from '../screens/SignupScreen';
 
 export default createRouter(() => ({
   home: () => HomeScreen,
-  links: () => LinksScreen,
+  stats: () => StatsScreen,
   settings: () => SettingsScreen,
   rootNavigation: () => RootNavigation,
-  friendslist: () => FriendsList,
+  tracklocation: () => TrackLocation,
   social: () => Social,
   login: () => Login,
+  signup: () => SignupScreen,
 }));

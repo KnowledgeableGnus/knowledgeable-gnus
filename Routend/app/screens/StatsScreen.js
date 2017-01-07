@@ -18,7 +18,7 @@ import Pie from './js/charts/Pie';
 import Theme from './js/theme';
 import data from './resources/data';
 
-export default class LinksScreen extends React.Component {
+export default class StatsScreen extends React.Component {
   // static route = {
   //   navigationBar: {
   //     title: 'Links',
