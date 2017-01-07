@@ -63,7 +63,7 @@ module.exports = {
   },
   coordinates: {
     get: function(req, res) {
-      var params = [req.query.id_users];
+      var params = [req.query.id_users , req.query.start, req.query.end];
       models.coordinates.get(params, function(err, results) {
         if (err) {
           console.log('error: ', err);
