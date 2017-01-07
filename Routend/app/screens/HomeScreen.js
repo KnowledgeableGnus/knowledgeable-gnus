@@ -153,7 +153,7 @@ class HomeScreen extends React.Component {
               }
           />
 
-          <Button onPress={() => { console.log(this.props) }}style={{backgroundColor: '#fafafa', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 3, borderColor: '#d3d3d3'}} textStyle={{fontSize: 12}}>
+          <Button onPress={() => { this.props.navigator.push(Router.getRoute('friendslist')) }} style={{backgroundColor: '#fafafa', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 3, borderColor: '#d3d3d3'}} textStyle={{fontSize: 12}}>
             Track a Place
           </Button>
         </View>
