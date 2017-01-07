@@ -1,4 +1,5 @@
 import React from 'react';
+import Exponent from 'exponent';
 import {
   Image,
   Linking,
@@ -26,6 +27,7 @@ class HomeScreen extends React.Component {
     this.state = {
       date:"2016-05-15",
       position: '',
+      ready: false,
       currentPosition: {
               latitude: 0,
               longitude: 0,
@@ -42,11 +44,22 @@ class HomeScreen extends React.Component {
   }
 
   componentWillMount() {
+    var that = this;
     this._setPosition();
-    console.log(this.props);
-    // this.test = this.props.polylines.map(function(item) {
-    //   return item.coordinates;
-    // });
+    this.props.fetchCoord().then(function() {
+    })
+    .done(function() {
+      that.currentData = [];
+      for (var i = 0; i < that.props.lines.length; i++) {
+        that.currentData.push({id: i, coordinates: {latitude: that.props.lines[i].lat, longitude: that.props.lines[i].lng}})
+      }
+      that.test = that.currentData.map(function(item) {
+      return item.coordinates;
+      });
+      that.setState({
+        ready: true,
+      });
+    });
 
   }
 
@@ -75,74 +88,82 @@ class HomeScreen extends React.Component {
 }
 
   render() {
-    return (
-      <View style={{flex: 1, backgroundColor: '#f6f6f6'}}>
+    if (this.state.ready === false) {
+      return (
+        <Exponent.Components.AppLoading />
+        )
+    } else {
+      return (
+        <View style={{flex: 1, backgroundColor: '#f6f6f6'}}>
 
-        <View style={{flex: 10}}>
-        <Components.MapView.Animated
-            showsUserLocation={true}
+          <View style={{flex: 10}}>
+          <Components.MapView.Animated
+              showsUserLocation={true}
 
-            style={{flex: 13, zIndex: 0}}
-            initialRegion={this.state.currentPosition}
-            followsUserLocation={true}
-            showsCompass={true}
-            >
+              style={{flex: 13, zIndex: 0}}
+              initialRegion={this.state.currentPosition}
+              // followsUserLocation={true}
+              showsCompass={true}
+              >
 
-          {this.props.polylines.map(marker =>
-            <Components.MapView.Marker
+            {this.currentData.map(marker =>
+              <Components.MapView.Marker
+                key={marker.id}
+                coordinate={marker.coordinates}
+                title={'test'}
+                description={'test'}
+              />
+            )}
 
-              coordinate={marker.coordinates}
-              title={'test'}
-              description={'test'}
+            <Components.MapView.Polyline
+            coordinates={this.test}
+            strokeWidth={3}
+            strokeColor={'#b2b2ff'}
             />
-          )}
+        </Components.MapView.Animated>
 
-          <Components.MapView.Polyline
-          coordinates={this.test}
-          strokeWidth={3}
-          strokeColor={'#b2b2ff'}
+        <View style={{flex: 1.2, position: 'absolute', zIndex: 1, top: (Dimensions.get('window').height * 0.686)}}>
+          <View style={{justifyContent: 'center', flexDirection: 'row', backgroundColor: '#fcfcfc', width: (Dimensions.get('window').width * 0.92), height: (Dimensions.get('window').height * 0.10), borderRadius: 2, left: (Dimensions.get('window').width * 0.04), borderWidth: 0.8, borderColor: '#d3d3d3', opacity: 0.97}}>
+          <DatePicker
+              style={{height: 2000, width: 118, right: 8, top: (Dimensions.get('window').height * 0.015)}}
+              date={this.state.date}
+              mode="date"
+              placeholder="select date"
+              format="YYYY-MM-DD"
+              minDate="2016-05-01"
+              maxDate="2017-12-01"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: 'absolute',
+                  left: 0,
+                  top: 8.3,
+                  marginLeft: 0,
+                  height: 23,
+                },
+                dateInput: {
+                  marginLeft: 32
+                }
+              }}
+              onDateChange={(date) => {
+                console.log(date);
+                this.setState({date: date})
+                }
+              }
           />
-      </Components.MapView.Animated>
 
-      <View style={{flex: 1.2, position: 'absolute', zIndex: 1, top: (Dimensions.get('window').height * 0.686)}}>
-        <View style={{justifyContent: 'center', flexDirection: 'row', backgroundColor: '#fcfcfc', width: (Dimensions.get('window').width * 0.92), height: (Dimensions.get('window').height * 0.10), borderRadius: 2, left: (Dimensions.get('window').width * 0.04), borderWidth: 0.8, borderColor: '#d3d3d3', opacity: 0.97}}>
-        <DatePicker
-            style={{height: 2000, width: 118, right: 8, top: (Dimensions.get('window').height * 0.015)}}
-            date={this.state.date}
-            mode="date"
-            placeholder="select date"
-            format="YYYY-MM-DD"
-            minDate="2016-05-01"
-            maxDate="2017-12-01"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 8.3,
-                marginLeft: 0,
-                height: 23,
-              },
-              dateInput: {
-                marginLeft: 32
-              }
-            }}
-            onDateChange={(date) => {
-              console.log(date);
-              this.setState({date: date})
-              }
-            }
-        />
-
-      <Button onPress={() => { this.props.navigator.push(Router.getRoute('friendslist'))}}style={{backgroundColor: '#fafafa', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 3, borderColor: '#d3d3d3'}} textStyle={{fontSize: 12}}>
-  Track a Place
-</Button>
-</View>
-</View></View>
+          <Button onPress={() => { console.log(this.props) }}style={{backgroundColor: '#fafafa', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 3, borderColor: '#d3d3d3'}} textStyle={{fontSize: 12}}>
+            Track a Place
+          </Button>
+        </View>
       </View>
+    </View>
+  </View>
     );
   }
+  }
+
 }
 
 
@@ -152,8 +173,9 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    AppState: state
+    polylines: state.today,
+    lines: state.testCount,
   }
 }
 
-export default connect(mapStateToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -82,3 +82,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+//logout this.props.navigation.getNavigator('root').replace('login')
