@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ScrollView,
   StyleSheet,
+  Text,
 } from 'react-native';
 import {
   ExponentConfigView,
@@ -43,7 +44,8 @@ export default class SettingsScreen extends React.Component {
 
   static route = {
     navigationBar: {
-      title: 'Settings'
+      title: (<Text style={{color: 'white', fontSize: 15}}>Settings</Text>),
+      backgroundColor: '#175785',
     },
   }
 

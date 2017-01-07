@@ -39,7 +39,8 @@ class HomeScreen extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
-      title: (<Image style={{height: 30, width: 100}} source={{uri: 'http://servicevirtualization.com/wp-content/uploads/2015/09/testing_graphic.jpg'}}></Image>)
+      title: (<Image style={{height: 30, width: 100}} source={{uri: 'http://servicevirtualization.com/wp-content/uploads/2015/09/testing_graphic.jpg'}}></Image>),
+      backgroundColor: '#175785'
     },
   }
 
@@ -85,7 +86,7 @@ class HomeScreen extends React.Component {
     }, (error) => {
         alert(error)
     }, {timeout: 20000, maximumAge: 1000});
-}
+  }
 
   render() {
     if (this.state.ready === false) {
@@ -153,7 +154,9 @@ class HomeScreen extends React.Component {
               }
           />
 
-          <Button onPress={() => { this.props.navigator.push(Router.getRoute('friendslist')) }} style={{backgroundColor: '#fafafa', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 3, borderColor: '#d3d3d3'}} textStyle={{fontSize: 12}}>
+          <Text style={{top: (Dimensions.get('window').height * 0.026), fontSize: 20, fontWeight: -0.6, color: '#a8a8a8'}}> | </Text>
+
+          <Button onPress={() => { this.props.navigator.push(Router.getRoute('friendslist')) }} style={{backgroundColor: '#fcfcfc', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 0, borderWidth: 0}} textStyle={{fontSize: 12}}>
             Track a Place
           </Button>
         </View>

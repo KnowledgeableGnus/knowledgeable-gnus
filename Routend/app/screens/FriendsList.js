@@ -46,8 +46,8 @@ class FriendsList extends React.Component {
 
   static route = {
     navigationBar: {
-      title: (<Text style={{color: 'white'}}>Track a Place</Text>),
-      backgroundColor: '#175786',
+      title: (<Text style={{color: 'white', fontSize: 15}}>Track a Place</Text>),
+      backgroundColor: '#175785',
     },
   }
 
