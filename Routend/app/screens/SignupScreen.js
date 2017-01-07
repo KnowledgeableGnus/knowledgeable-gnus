@@ -54,7 +54,7 @@ export default class Login extends React.Component {
               usernameStyle={{bottom: -10, borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomLeftRadius: 0, borderBottomRightRadius: 0}}
               passwordStyle={{borderTopLeftRadius: 0, borderTopRightRadius: 0,}}
               btnStyle={{bottom: 12,}}
-              buttonText={'Login'}
+              buttonText={'Create'}
               />
               <LoginFb
               onPress={() => console.log('login with fb')}
