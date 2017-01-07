@@ -8,17 +8,17 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Dimensions,
+  Image,
 } from 'react-native';
 import {
   ExponentLinksView,
 } from '@exponent/samples';
-import Button from 'react-native-button';
 import AreaSpline from './js/charts/AreaSpline';
 import Pie from './js/charts/Pie';
 import Theme from './js/theme';
 import data from './resources/data';
 
-export default class LinksScreen extends React.Component {
+export default class StatsScreen extends React.Component {
   // static route = {
   //   navigationBar: {
   //     title: 'Links',
@@ -35,6 +35,13 @@ export default class LinksScreen extends React.Component {
     this._shuffle = this._shuffle.bind(this);
   }
 
+  static route = {
+    navigationBar: {
+      title: (<Text style={{color: 'white', fontSize: 15}}>Statistics</Text>),
+      backgroundColor: '#175785',
+    },
+  }
+
   _onPieItemSelected(newIndex){
     this.setState({...this.state, activeIndex: newIndex, spendingsPerYear: this._shuffle(data.spendingsPerYear)});
   }
@@ -49,12 +56,12 @@ export default class LinksScreen extends React.Component {
 
   render() {
     const height = 200;
-    const width = Dimensions.get('window').width;
+    const width = (Dimensions.get('window').width * 0.96);
 
     return (
       <ScrollView>
         <View style={styles.container} >
-          <Text style={styles.chart_title}>Distribution of time spent today</Text>
+          <Text style={styles.chart_title}>Time Spent Today</Text>
           <Pie
             pieWidth={150}
             pieHeight={150}
@@ -63,7 +70,7 @@ export default class LinksScreen extends React.Component {
             width={width}
             height={height}
             data={data.spendingsLastMonth} />
-          <Text style={styles.chart_title}>Spending per year in {data.spendingsLastMonth[this.state.activeIndex].name}</Text>
+          <Text style={styles.chart_title}>Time Spent Per Day in {data.spendingsLastMonth[this.state.activeIndex].name}</Text>
           <AreaSpline
             width={width}
             height={height}
@@ -85,9 +92,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingBottom: 5,
     paddingLeft: 5,
-    fontSize: 18,
+    fontSize: 14,
     backgroundColor:'white',
-    color: 'grey',
+    color: '#404d5b',
+    opacity: 0.8,
     fontWeight:'bold',
   }
 });

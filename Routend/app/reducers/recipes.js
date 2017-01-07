@@ -20,14 +20,37 @@ export const recipeCount = createReducer(0, {
   }
 });
 
-export const testCount = createReducer({}, {
+export const trackedPlaces = createReducer([], {
+    [types.GET_PLACES](state, action) {
+        return action.places;
+    }
+});
+
+export const testCount = createReducer([], {
   // [types.SET_SEARCHED_RECIPES](state, action) {
   //   return action.recipes.length;
   // }
   ['TEST'](state, action){
-    console.log('action', action)
-    console.log('action.test', action.test);
-    return action.test.rates;
+    // console.log('action.test', action.test);
+    // var results = action.test.map(function(value, index) {
+    //     var obj = Object.create(null);
+    //     obj[coordinates] = Object.create(null);
+    //     obj.id = index;
+    //     obj.coordinates.latitude = value.lat;
+    //     obj.coordinates.longitude = value.lng;
+    //     return obj;
+    // });
+    // console.log('results testcount', results);
+    // return results;
+    // let results = [];
+    // action.test.forEach((coord, index) => {
+    //     var obj = {};
+    //     obj[coordinates] = {};
+    //     obj[coordinates].latitude = coord.lat;
+    //     obj[coordinates].longitude = coord.lng;
+    //     results.push(obj);
+    // })
+    return action.test;
   }
 });
 

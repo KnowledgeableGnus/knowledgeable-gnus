@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Exponent from 'exponent';
 // import ReactNative from 'react-native';
 import { connect } from'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,11 +17,17 @@ import {
   View,
 } from 'react-native';
 import Router from '../navigation/Router';
-
+import cacheAssetsAsync from '../../utilities/cacheAssetsAsync';
+import {
+  FontAwesome,
+} from '@exponent/vector-icons';
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+    appIsReady: false,
+    }
   }
 
   componentWillMount() {
@@ -55,7 +62,7 @@ class AppContainer extends Component {
       return (
         <View style={styles.container}>
           <NavigationProvider router={Router}>
-            <StackNavigation id="root" initialRoute={Router.getRoute('rootNavigation')} />
+            <StackNavigation id="root" initialRoute={Router.getRoute('login')} />
           </NavigationProvider>
 
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
