@@ -17,9 +17,9 @@ export function fetchRecipes(ingredients) {
   }
 }
 
-export function fetchCoord(location, userid) {
+export function fetchCoord(userId, startDate, endDate) {
   return (dispatch, getState) => {
-    return fetch('http://107.170.226.9:3000/coordinates?id_users=1&start=2017-01-06&end=2017-01-07')
+    return fetch(`http://107.170.226.9:3000/coordinates?id_users=${userId}&start=${startDate}&end=${endDate}`)
     .then((resp) => resp.json())
     .then(resp => {
       console.log('api respon', resp);
@@ -28,9 +28,9 @@ export function fetchCoord(location, userid) {
   }
 }
 
-export function fetchPlaces(location,userid) {
+export function fetchPlaces(userId) {
   return (dispatch, getState) => {
-    return fetch('http://107.170.226.9:3000/locations?id_users=1')
+    return fetch(`http://107.170.226.9:3000/locations?id_users=${userId}`)
     .then((resp) => resp.json())
     .then(resp => {
       console.log('api respon', resp);

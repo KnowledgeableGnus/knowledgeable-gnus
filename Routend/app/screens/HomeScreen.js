@@ -20,12 +20,14 @@ import Button from 'apsl-react-native-button';
 import Router from '../navigation/Router';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
+var moment = require('moment');
 
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date:"2016-05-15",
+      date:"2017-01-01",
+      userId: 1,
       position: '',
       ready: false,
       currentPosition: {
@@ -45,9 +47,12 @@ class HomeScreen extends React.Component {
   }
 
   componentWillMount() {
+    this.state.date = moment().format("YYYY-MM-DD");
+    this.state.currentStart = moment(this.state.date + ' 00').unix();
+    this.state.currentEnd = moment(this.state.date + ' 24').unix();
     var that = this;
     this._setPosition();
-    this.props.fetchCoord()
+    this.props.fetchCoord(this.state.userId, this.state.currentStart, this.state.currentEnd)
     .done(function() {
       that.currentData = [];
       for (var i = 0; i < that.props.lines.length; i++) {
@@ -57,7 +62,7 @@ class HomeScreen extends React.Component {
       return item.coordinates;
       });
       console.log('that.test', that.test)
-      that.props.fetchPlaces().done(function() {
+      that.props.fetchPlaces(that.state.userId).done(function() {
         that.tracked = [];
         for (var i = 0; i < that.props.places.length; i++) {
           that.tracked.push({id: that.props.places[i].id, name: that.props.places[i].name, category: that.props.places[i].category, coordinates: {latitude: that.props.places[i].lat, longitude: that.props.places[i].lng}});
@@ -96,6 +101,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
+    var that = this;
     if (this.state.ready === false) {
       return (
         <Exponent.Components.AppLoading />
@@ -103,77 +109,92 @@ class HomeScreen extends React.Component {
     } else {
       return (
         <View style={{flex: 1, backgroundColor: '#f6f6f6'}}>
-
           <View style={{flex: 10}}>
-          <Components.MapView.Animated
-              showsUserLocation={true}
+            <Components.MapView.Animated
+                showsUserLocation={true}
 
-              style={{flex: 13, zIndex: 0}}
-              initialRegion={this.state.currentPosition}
-              // followsUserLocation={true}
-              showsCompass={true}
-              >
+                style={{flex: 13, zIndex: 0}}
+                initialRegion={this.state.currentPosition}
+                // followsUserLocation={true}
+                showsCompass={true}
+                >
 
-            {this.tracked.map(marker =>
-              <Components.MapView.Marker
-                key={marker.id}
-                coordinate={marker.coordinates}
-                title={marker.name}
-                description={'Category: ' + marker.category}
+              {this.tracked.map(marker =>
+                <Components.MapView.Marker
+                  key={marker.id}
+                  coordinate={marker.coordinates}
+                  title={marker.name}
+                  description={'Category: ' + marker.category}
+                />
+              )}
+
+              <Components.MapView.Polyline
+              coordinates={this.test}
+              strokeWidth={3}
+              strokeColor={'#b2b2ff'}
               />
-            )}
-
-            <Components.MapView.Polyline
-            coordinates={this.test}
-            strokeWidth={3}
-            strokeColor={'#b2b2ff'}
-            />
-        </Components.MapView.Animated>
-
-        <View style={{flex: 1.2, position: 'absolute', zIndex: 1, top: (Dimensions.get('window').height * 0.686)}}>
-          <View style={{justifyContent: 'center', flexDirection: 'row', backgroundColor: '#fcfcfc', width: (Dimensions.get('window').width * 0.92), height: (Dimensions.get('window').height * 0.10), borderRadius: 2, left: (Dimensions.get('window').width * 0.04), borderWidth: 0.8, borderColor: '#d3d3d3', opacity: 0.97}}>
-          <DatePicker
-              style={{height: 2000, width: 118, right: 8, top: (Dimensions.get('window').height * 0.015)}}
-              date={this.state.date}
-              mode="date"
-              placeholder="select date"
-              format="YYYY-MM-DD"
-              minDate="2016-05-01"
-              maxDate="2017-12-01"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 8.3,
-                  marginLeft: 0,
-                  height: 23,
-                },
-                dateInput: {
-                  marginLeft: 32
-                }
-              }}
-              onDateChange={(date) => {
-                console.log(date);
-                this.setState({date: date})
-                }
-              }
-          />
-
-          <Text style={{top: (Dimensions.get('window').height * 0.026), fontSize: 20, fontWeight: '100',color: '#545454'}}> | </Text>
-
-          <Button onPress={() => { this.props.navigator.push(Router.getRoute('tracklocation')) }} style={{backgroundColor: '#fcfcfc', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 0, borderWidth: 0}} textStyle={{fontSize: 12}}>
-            Track a Place
-          </Button>
+          </Components.MapView.Animated>
+          <View style={{flex: 1.2, position: 'absolute', zIndex: 1, top: (Dimensions.get('window').height * 0.686)}}>
+            <View style={{justifyContent: 'center', flexDirection: 'row', backgroundColor: '#fcfcfc', width: (Dimensions.get('window').width * 0.92), height: (Dimensions.get('window').height * 0.10), borderRadius: 2, left: (Dimensions.get('window').width * 0.04), borderWidth: 0.8, borderColor: '#d3d3d3', opacity: 0.97}}>
+                <DatePicker
+                    style={{height: 2000, width: 118, right: 8, top: (Dimensions.get('window').height * 0.015)}}
+                    date={this.state.date}
+                    mode="date"
+                    placeholder="select date"
+                    format="YYYY-MM-DD"
+                    minDate="2016-05-01"
+                    maxDate={this.state.date}
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                      dateIcon: {
+                        position: 'absolute',
+                        left: 0,
+                        top: 8.3,
+                        marginLeft: 0,
+                        height: 23,
+                      },
+                      dateInput: {
+                        marginLeft: 32
+                      }
+                    }}
+                    onDateChange={(date) => {
+                      var that = this;
+                      var startDate = moment(date + ' 00').unix();
+                      var endDate = moment(date + '24').unix();
+                      this.props.fetchCoord(this.state.userId, startDate, endDate)
+                      .done(function() {
+                        that.currentData = [];
+                        for (var i = 0; i < that.props.lines.length; i++) {
+                          that.currentData.push({id: i, coordinates: {latitude: that.props.lines[i].lat, longitude: that.props.lines[i].lng}})
+                        }
+                        that.test = that.currentData.map(function(item) {
+                        return item.coordinates;
+                        });
+                        console.log('that.test', that.test)
+                        that.props.fetchPlaces(that.state.userId).done(function() {
+                          that.tracked = [];
+                          for (var i = 0; i < that.props.places.length; i++) {
+                            that.tracked.push({id: that.props.places[i].id, name: that.props.places[i].name, category: that.props.places[i].category, coordinates: {latitude: that.props.places[i].lat, longitude: that.props.places[i].lng}});
+                          }
+                          that.setState({
+                            ready: true,
+                          });
+                        });
+                      });
+                    }}
+                />
+                <Text style={{top: (Dimensions.get('window').height * 0.026), fontSize: 20, fontWeight: '100',color: '#545454'}}> | </Text>
+                <Button onPress={() => { this.props.navigator.push(Router.getRoute('tracklocation')) }} style={{backgroundColor: '#fcfcfc', top: (Dimensions.get('window').height * 0.026), left: 8, height: 25, width: 100, borderRadius: 0, borderWidth: 0}} textStyle={{fontSize: 12}}>
+                  Track a Place
+                </Button>
+              </View>
+           </View>
         </View>
       </View>
-    </View>
-  </View>
-    );
+      );
+    }
   }
-  }
-
 }
 
 
