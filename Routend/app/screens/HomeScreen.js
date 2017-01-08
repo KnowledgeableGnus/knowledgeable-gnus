@@ -52,6 +52,10 @@ class HomeScreen extends React.Component {
     this.state.currentEnd = moment(this.state.date + ' 24').unix();
     var that = this;
     this._setPosition();
+    // use for testing purpose
+    this.state.currentStart = 0;
+    this.state.currentEnd = 1483947200;
+    // delete states above later
     this.props.fetchCoord(this.state.userId, this.state.currentStart, this.state.currentEnd)
     .done(function() {
       that.currentData = [];
