@@ -13,27 +13,27 @@ import { Font } from 'exponent';
 const list2 = [
   {
     title: 'General',
-    icon: 'av-timer'
+    icon: 'adjust'
   },
   {
     title: 'Edit Profile',
-    icon: 'flight-takeoff'
+    icon: 'cloud-queue'
   },
   {
     title: 'Notifications',
-    icon: 'av-timer'
+    icon: 'alarm'
   },
   {
     title: 'Data',
-    icon: 'flight-takeoff'
+    icon: 'airplanemode-active'
   },
   {
     title: 'Help Center',
-    icon: 'av-timer'
+    icon: 'business-center'
   },
   {
     title: 'Report a Problem',
-    icon: 'flight-takeoff'
+    icon: 'build'
   },
 ]
 
