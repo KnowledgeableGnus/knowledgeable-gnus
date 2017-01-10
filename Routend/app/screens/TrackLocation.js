@@ -11,7 +11,7 @@ import {
 import {
   ExponentLinksView,
 } from '@exponent/samples';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import DatePicker from 'react-native-datepicker';
