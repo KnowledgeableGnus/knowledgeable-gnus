@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  AlertIOS,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
@@ -97,9 +98,9 @@ class HomeScreen extends React.Component {
         });
   }
 
-  // componentDidMount() {
-  //   setInterval(this._setPosition.bind(this), 5000);
-  // }
+  componentDidMount() {
+    setInterval(this._setPosition.bind(this), 5000);
+  }
 
   _setPosition() {
     navigator.geolocation.getCurrentPosition((position) => {
