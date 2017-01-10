@@ -25,7 +25,7 @@ var mockData = function(centralLat, centralLong, startingTime) {
 
     //Stub minimum of 2 hours of coordinates at each location
     for (var j = 0; j < 24 + Math.random() * 96; j++) {
-      coords.push([endLat + (Math.random() / 1000), endLong + (Math.random() / 1000), i * 300]);
+      coords.push([endLat + (Math.random() / 1000), endLong + (Math.random() / 1000)]);
     }
   }
 

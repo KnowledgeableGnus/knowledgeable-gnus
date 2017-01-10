@@ -70,7 +70,7 @@ export default class StatsScreen extends React.Component {
             width={width}
             height={height}
             data={data.spendingsLastMonth} />
-          <Text style={styles.chart_title}>Time Spent Per Day in {data.spendingsLastMonth[this.state.activeIndex].name}</Text>
+          <Text style={styles.chart_title}>Time Spent Per Day in a Month - {data.spendingsLastMonth[this.state.activeIndex].name} </Text>
           <AreaSpline
             width={width}
             height={height}
