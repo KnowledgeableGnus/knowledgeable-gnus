@@ -72,7 +72,7 @@ module.exports = {
       });
     },
     post: function(req, res) {
-      var params = [req.body.id_users, req.body.time, req.body.lat, req.body.lng];
+      var params = [req.body.id_users, req.body.time, req.body.lat, req.body.long];
       models.coordinates.post(params, function(err, results) {
         if (err) {
           console.log('error: ', err);
@@ -92,7 +92,7 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      var params = [req.body.id_users, req.body.name, req.body.category, req.body.lat, req.body.lng];
+      var params = [req.body.id_users, req.body.name, req.body.category, req.body.lat, req.body.long];
       models.locations.post(params, function(err, results) {
         if (err) {
           console.log('error: ', err);
