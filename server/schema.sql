@@ -19,7 +19,8 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` INTEGER AUTO_INCREMENT,
   `username` VARCHAR(60),
-  `password` VARCHAR(60),
+  `hash` VARCHAR(160),
+  `salt` VARCHAR(60),
   `address` VARCHAR(120),
   `email` VARCHAR(60),
   `createdAt` DATETIME,

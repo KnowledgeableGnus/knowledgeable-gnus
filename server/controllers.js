@@ -1,5 +1,6 @@
 var models = require('./models.js');
 var geo = require('geo-helpers');
+var crypto = require('crypto');
 
 // var populateDatabase = function(coords) {
 //     for (var i  = 0; i < coords.length; i++) {
@@ -38,21 +39,53 @@ var geo = require('geo-helpers');
 
 //   return coords;
 // }
+var genRandomString = function(length) {
+  return crypto.randomBytes(Math.ceil(length/2))
+          .toString('hex')
+          .slice(0, length)
+};
+
+var sha512 = function(password, salt) {
+  var hash = crypto.createHmac('sha512', salt);
+  hash.update(password);
+  var value = hash.digest('hex');
+  return {
+    salt: salt,
+    passwordHash: value
+  };
+};
+
+var saltHashPassword = function(userpassword) {
+  var salt = genRandomString(16);
+  var passwordData = sha512(userpassword, salt);
+  return passwordData;
+}
+
+
 
 module.exports = {
 
   users: {
     get: function(req, res) {
-      models.users.get(function(err, results) {
+      var params = [req.query.email];
+      models.users.get(params, function(err, results) {
         if (err) {
           //console.log for now, handle appropriatly eventually
           console.log('error: ', err);
         }
-        res.json(results);
+        var validate = sha512(req.query.password, results[0].salt);
+        if(validate.passwordHash === results[0].hash){
+          console.log('validated');
+          res.json(results);
+        } else {
+          res.sendStatus(401);
+        }
       });
     },
     post: function(req, res) {
-      var params = [req.body.username, req.body.password, req.body.address, req.body.email, req.body.createdAt];
+      var passwordData = saltHashPassword(req.body.password);
+
+      var params = [req.body.username, passwordData.passwordHash, passwordData.salt, req.body.address, req.body.email, req.body.createdAt];
       models.users.post(params, function(err, results) {
         if (err) {
           console.log('error: ', err);

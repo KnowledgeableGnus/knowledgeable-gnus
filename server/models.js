@@ -3,14 +3,14 @@ var db = require('./db');
 module.exports = {
 
   users: {
-    get: function(callback) {
-      var queryStr = 'SELECT * FROM users';
-      db.query(queryStr, function(err, results) {
+    get: function(params, callback) {
+      var queryStr = 'SELECT id, hash, salt FROM users WHERE email = ?';
+      db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
     },
     post: function (params, callback) {
-      var queryStr = 'INSERT INTO users(username, password, address, email, createdAt) VALUE (?, ?, ?, ?, ?)';
+      var queryStr = 'INSERT INTO users(username, hash, salt, address, email, createdAt) VALUE (?, ?, ?, ?, ?, ?)';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
