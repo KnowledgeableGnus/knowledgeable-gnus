@@ -1,5 +1,4 @@
 var controller = require('./controllers.js');
-var passport = require('passport');
 var router = require('express').Router();
 
 router.get('/users', controller.users.get);

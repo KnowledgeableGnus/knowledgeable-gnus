@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS `coordinates`;
 CREATE TABLE `coordinates` (
   `id` INTEGER AUTO_INCREMENT,
   `id_users` INTEGER,
-  `time` DATETIME,
+  `time` INTEGER,
   `lat` DECIMAL(10, 6),
   `lng` DECIMAL(10, 6),
   PRIMARY KEY (`id`)
