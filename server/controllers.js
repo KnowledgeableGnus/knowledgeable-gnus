@@ -146,8 +146,37 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      var params = [req.body.id_users, req.body.first_name, req.body.last_name, req.body.img, req.body.city, req.body.state, req.body.push];
+      var params = [req.body.id_users, req.body.first_name, req.body.last_name, req.body.gender, req.body.city, req.body.state, req.body.push];
       models.profiles.post(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.sendStatus(201);
+      });
+    },
+    put: function(req, res) {
+      var params = [req.body.push, req.body.id_users];
+      models.profiles.put(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.sendStatus(200);
+      });
+    }
+  },
+  status: {
+    get: function(req, res) {
+      var params = [req.query.id_users];
+      models.status.get(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.json(results);
+      });
+    },
+    post: function(req, res) {
+      var params = [req.body.id_users, req.body.status];
+      models.status.post(params, function(err, results) {
         if(err) {
           console.log('error: ', err);
         }
@@ -155,6 +184,27 @@ module.exports = {
       });
     }
   },
+  images: {
+    get: function(req, res) {
+      var params = [req.query.id_users];
+      models.images.get(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.json(results);
+      });
+    },
+    post: function(req, res) {
+      var params = [req.body.id_users, req.body.image];
+      models.images.post(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.sendStatus(201);
+      });
+    }
+  },
+
   interests: {
     get: function(req, res) {
       var params = [req.query.interest];
@@ -173,6 +223,27 @@ module.exports = {
         }
         res.sendStatus(201);
       });
+    }
+  },
+
+  matches: {
+    get: function(req, res) {
+      var params = [req.query.id_users];
+      models.matches.get(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.json(results);
+      });
+    },
+    post: function(req, res) {
+      var params = [req.body.id_users, req.body.match_id];
+      models.matches.post(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.sendStatus(201);
+      })
     }
   },
 

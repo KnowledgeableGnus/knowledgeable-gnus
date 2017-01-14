@@ -72,10 +72,38 @@ CREATE TABLE `profiles` (
   `id_users` INTEGER,
   `first_name` VARCHAR(60),
   `last_name` VARCHAR(60),
-  `img` VARCHAR(120),
+  `gender` VARCHAR(60),
   `city` VARCHAR(60),
   `state` VARCHAR(60),
   `push` BOOLEAN,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Status'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `status`;
+    
+CREATE TABLE `status` (
+  `id` INTEGER AUTO_INCREMENT,
+  `id_users` INTEGER,
+  `status` VARCHAR(140),
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Image'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `images`;
+    
+CREATE TABLE `images` (
+  `id` INTEGER AUTO_INCREMENT,
+  `id_users` INTEGER,
+  `image` VARCHAR(160),
   PRIMARY KEY (`id`)
 );
 
@@ -94,6 +122,20 @@ CREATE TABLE `interests` (
 );
 
 -- ---
+-- Table 'Matches'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `matches`;
+    
+CREATE TABLE `matches` (
+  `id` INTEGER AUTO_INCREMENT,
+  `id_users` INTEGER,
+  `match_id` INTEGER,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
 -- Foreign Keys 
 -- ---
 
@@ -101,6 +143,10 @@ ALTER TABLE `coordinates` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 ALTER TABLE `locations` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 ALTER TABLE `profiles` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 ALTER TABLE `interests` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `matches` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `matches` ADD FOREIGN KEY (match_id) REFERENCES `users` (`id`);
+ALTER TABLE `images` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `status` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 
 -- ---
 -- Table Properties
