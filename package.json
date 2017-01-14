@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/KnowledgeableGnus/knowledgeable-gnus#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "geo-helpers": "^1.2.5",

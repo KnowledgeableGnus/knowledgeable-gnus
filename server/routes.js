@@ -13,6 +13,13 @@ router.get('/locations', controller.locations.get);
 
 router.post('/locations', controller.locations.post);
 
-//router.get('/locationtime', controller.locationtime);
+router.get('/profiles', controller.profiles.get);
+
+router.post('/profiles', controller.profiles.post);
+
+router.get('/interests', controller.interests.get);
+
+router.post('/interests', controller.interests.post);
 
 module.exports = router;
+
