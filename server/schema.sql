@@ -61,11 +61,46 @@ CREATE TABLE `locations` (
 );
 
 -- ---
+-- Table 'Profile'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `profiles`;
+    
+CREATE TABLE `profiles` (
+  `id` INTEGER AUTO_INCREMENT,
+  `id_users` INTEGER,
+  `first_name` VARCHAR(60),
+  `last_name` VARCHAR(60),
+  `img` VARCHAR(120),
+  `city` VARCHAR(60),
+  `state` VARCHAR(60),
+  `push` BOOLEAN,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Interests'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `interests`;
+    
+CREATE TABLE `interests` (
+  `id` INTEGER AUTO_INCREMENT,
+  `id_users` INTEGER,
+  `interest` VARCHAR(60),
+  PRIMARY KEY (`id`)
+);
+
+-- ---
 -- Foreign Keys 
 -- ---
 
 ALTER TABLE `coordinates` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 ALTER TABLE `locations` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `profiles` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `interests` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 
 -- ---
 -- Table Properties

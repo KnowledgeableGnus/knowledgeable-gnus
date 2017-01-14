@@ -14,15 +14,13 @@ router.get('/locations', controller.locations.get);
 
 router.post('/locations', controller.locations.post);
 
-router.get('/auth/facebook', passport.authenticate('passport'))
+router.get('/profiles', controller.profiles.get);
 
-//router.get('/locationtime', controller.locationtime);
+router.post('/profiles', controller.profiles.post);
+
+router.get('/interests', controller.interests.get);
+
+router.post('/interests', controller.interests.post);
 
 module.exports = router;
 
-//session store (db)
-
-//parse cookie
-//set session  => req.session ={user: username}
-//middleware
-//route handler, logic

@@ -135,6 +135,46 @@ module.exports = {
       })
     }
   },
+  profiles: {
+    get: function(req, res) {
+      var params = [req.query.id_users];
+      models.profiles.get(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.json(results);
+      });
+    },
+    post: function (req, res) {
+      var params = [req.body.id_users, req.body.first_name, req.body.last_name, req.body.img, req.body.city, req.body.state, req.body.push];
+      models.profiles.post(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.sendStatus(201);
+      });
+    }
+  },
+  interests: {
+    get: function(req, res) {
+      var params = [req.query.interest];
+      models.interests.get(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.json(results);
+      });
+    },
+    post: function(req, res) {
+      var params = [req.body.id_users, req.body.interest];
+      models.interests.post(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.sendStatus(201);
+      });
+    }
+  },
 
   populateDatabase: populateDatabase,
   mockData: mockData
