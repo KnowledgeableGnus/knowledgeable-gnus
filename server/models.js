@@ -55,10 +55,46 @@ module.exports = {
       });
     },
     post: function(params, callback) {
-      var queryStr = 'INSERT INTO profiles(id_users, first_name, last_name, img, city, state, push) VALUE (?, ?, ?, ?, ?, ?, ?)';
+      var queryStr = 'INSERT INTO profiles(id_users, first_name, last_name, gender, city, state, push) VALUE (?, ?, ?, ?, ?, ?, ?)';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
+    },
+    put: function(params, callback) {
+      var queryStr = 'UPDATE profiles SET push = ? WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    }
+  },
+
+  status: {
+    get: function(params, callback) {
+      var queryStr = 'SELECT status FROM status WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
+    post: function(params, callback) {
+      var queryStr = 'INSERT INTO status(id_users, status) VALUE (?, ?)';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    }
+  },
+
+  images: {
+    get: function(params, callback) {
+      var queryStr = 'SELECT image FROM images WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
+    post: function(params, callback) {
+      var queryStr = 'INSERT INTO images(id_users, image) VALUE (?, ?)';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      })
     }
   },
 
@@ -71,6 +107,21 @@ module.exports = {
     },
     post: function(params, callback) {
       var queryStr = 'INSERT INTO interests(id_users, interest) VALUE (?, ?)';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    }
+  },
+
+  matches: {
+    get: function(params, callback) {
+      var queryStr = 'SELECT match_id FROM matches WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
+    post: function(params, callback) {
+      var queryStr = 'INSERT INTO matches(id_users, match_id) VALUE (?, ?)';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
