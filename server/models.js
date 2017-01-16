@@ -40,10 +40,31 @@ module.exports = {
       });
     },
     post: function (params, callback) {
-      var queryStr = 'INSERT INTO locations(id_users, name, category, lat, lng) VALUE (?, ?, ?, ?, ?)';
+      var queryStr = 'INSERT INTO locations(id_users, name, category, placeId, image, address, rating, lat, lng) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?)';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
+    }
+  },
+
+  categoryStats: {
+    get: function(params, callback) {
+      var queryStr = 'SELECT * FROM categoryStats WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
+    post: function(params, callback) {
+      var queryStr = "INSERT INTO categoryStats(id_users, name, category, enter_time, exit_time) VALUES (?, ?, (SELECT category FROM locations WHERE name = ? LIMIT 1), ?, ?)";
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
+    put: function(params, callback) {
+      var queryStr = 'UPDATE categoryStats SET exit_time = ? WHERE (id_users = ? AND name = ? AND exit_time = 0)';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      })
     }
   },
 

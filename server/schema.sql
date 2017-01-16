@@ -55,8 +55,29 @@ CREATE TABLE `locations` (
   `id_users` INTEGER,
   `name` VARCHAR(60),
   `category` VARCHAR(60),
+  `placeId` VARCHAR(140),
+  `image` VARCHAR(2083),
+  `address` VARCHAR (240),
+  `rating` INTEGER,
   `lat` DECIMAL(10, 6),
   `lng` DECIMAL(10, 6),
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'CategoryStats'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `categoryStats`;
+    
+CREATE TABLE `categoryStats` (
+  `id` INTEGER AUTO_INCREMENT,
+  `id_users` INTEGER,
+  `name` VARCHAR(60),
+  `category` VARCHAR(60),
+  `enter_time` INTEGER,
+  `exit_time` INTEGER,
   PRIMARY KEY (`id`)
 );
 
@@ -103,7 +124,7 @@ DROP TABLE IF EXISTS `images`;
 CREATE TABLE `images` (
   `id` INTEGER AUTO_INCREMENT,
   `id_users` INTEGER,
-  `image` VARCHAR(160),
+  `image` VARCHAR(2083),
   PRIMARY KEY (`id`)
 );
 
@@ -147,6 +168,7 @@ ALTER TABLE `matches` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 ALTER TABLE `matches` ADD FOREIGN KEY (match_id) REFERENCES `users` (`id`);
 ALTER TABLE `images` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 ALTER TABLE `status` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `categoryStats` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 
 -- ---
 -- Table Properties
