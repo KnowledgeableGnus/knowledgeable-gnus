@@ -76,7 +76,7 @@ module.exports = {
       });
     },
     post: function(params, callback) {
-      var queryStr = 'INSERT INTO profiles(id_users, first_name, last_name, gender, city, state, push) VALUE (?, ?, ?, ?, ?, ?, ?)';
+      var queryStr = 'INSERT INTO profiles(id_users, first_name, last_name, gender, city, state, image, status, push) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?)';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });

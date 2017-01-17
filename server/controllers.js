@@ -177,7 +177,7 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      var params = [req.body.id_users, req.body.first_name, req.body.last_name, req.body.gender, req.body.city, req.body.state, req.body.push];
+      var params = [req.body.id_users, req.body.first_name, req.body.last_name, req.body.gender, req.body.city, req.body.state, req.body.image, req.body.status, req.body.push];
       models.profiles.post(params, function(err, results) {
         if(err) {
           console.log('error: ', err);
