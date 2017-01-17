@@ -13,6 +13,12 @@ router.get('/locations', controller.locations.get);
 
 router.post('/locations', controller.locations.post);
 
+router.get('/categoryStats', controller.categoryStats.get);
+
+router.post('/categoryStats', controller.categoryStats.post);
+
+router.put('/categoryStats', controller.categoryStats.put);
+
 router.get('/profiles', controller.profiles.get);
 
 router.post('/profiles', controller.profiles.post);

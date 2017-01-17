@@ -126,7 +126,7 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      var params = [req.body.id_users, req.body.name, req.body.category, req.body.lat, req.body.long];
+      var params = [req.body.id_users, req.body.name, req.body.category, req.body.placeId, req.body.image, req.body.address, req.body.rating, req.body.lat, req.body.lng];
       models.locations.post(params, function(err, results) {
         if (err) {
           console.log('error: ', err);
@@ -135,6 +135,37 @@ module.exports = {
       })
     }
   },
+
+  categoryStats: {
+    get: function(req, res) {
+      var params = [req.query.id_users];
+      models.categoryStats.get(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.json(results);
+      });
+    },
+    post: function(req, res) {
+      var params = [req.body.id_users, req.body.name, req.body.name, req.body.enter_time, req.body.exit_time];
+      models.categoryStats.post(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.sendStatus(201);
+      });
+    },
+    put: function(req, res) {
+      var params = [req.body.exit_time, req.body.id_users, req.body.name];
+      models.categoryStats.put(params, function(err, results) {
+        if(err) {
+          console.log('error: ', err);
+        }
+        res.sendStatus(200);
+      });
+    }
+  },
+
   profiles: {
     get: function(req, res) {
       var params = [req.query.id_users];
