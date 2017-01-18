@@ -217,7 +217,7 @@ module.exports = {
         });
       } else if (req.body.status) {
         var params = [req.body.status, req.body.id_users];
-        models.profiles.putImage(params, function(err, results) {
+        models.profiles.putStatus(params, function(err, results) {
           if(err) {
             console.log('error: ', err);
           }
