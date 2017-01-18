@@ -136,7 +136,7 @@ module.exports = {
 
   matches: {
     get: function(params, callback) {
-      var queryStr = 'SELECT match_id FROM matches WHERE id_users = ?';
+      var queryStr = 'SELECT * FROM profiles WHERE id_users IN (SELECT match_id FROM matches WHERE id_users = ?)';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });

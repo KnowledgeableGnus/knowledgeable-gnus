@@ -1,6 +1,7 @@
 var models = require('./models.js');
 var geo = require('geo-helpers');
 var crypto = require('crypto');
+var moment = require('moment');
 
 var populateDatabase = function(coords) {
     for (var i  = 0; i < coords.length; i++) {
@@ -76,7 +77,6 @@ module.exports = {
         }
         var validate = sha512(req.query.password, results[0].salt);
         if(validate.passwordHash === results[0].hash){
-          console.log('validated');
           res.json(results);
         } else {
           res.sendStatus(401);
@@ -106,13 +106,26 @@ module.exports = {
       });
     },
     post: function(req, res) {
-      var params = [req.body.id_users, req.body.time, req.body.lat, req.body.long];
-      models.coordinates.post(params, function(err, results) {
-        if (err) {
-          console.log('error: ', err);
+      var time = moment(req.body.location.coords.timestamp).unix();
+      if(req.body.geolocation !== undefined) {
+        if(req.body.geolocation.action === 'ENTER') {
+          models.categoryStats.post([req.body.id_users, req.body.geolocation.identifier, req.body.identifier, time, 0], function(err, results) {
+            res.sendStatus(201);
+          });
+        } else if (req.body.geolocation.action === 'EXIT') {
+          models.categoryStats.put([time, req.body.id_users, req.body.geolocation.identifier], function(err, results) {
+            res.sendStatus(200);
+          });
         }
-        res.sendStatus(201);
-      });
+      } else {
+        var params = [req.query.id_users, time, req.body.location.coords.latitude, req.body.location.coords.longitude];
+        models.coordinates.post(params, function(err, results) {
+          if (err) {
+            console.log('error: ', err);
+          }
+          res.sendStatus(201);
+        });
+      }
     }
   },
   locations: {
