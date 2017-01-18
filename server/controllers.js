@@ -199,13 +199,31 @@ module.exports = {
       });
     },
     put: function(req, res) {
-      var params = [req.body.push, req.body.id_users];
-      models.profiles.put(params, function(err, results) {
-        if(err) {
-          console.log('error: ', err);
-        }
-        res.sendStatus(200);
-      });
+      if(req.body.push) {
+        var params = [req.body.push, req.body.id_users];
+        models.profiles.putPush(params, function(err, results) {
+          if(err) {
+            console.log('error: ', err);
+          }
+          res.sendStatus(200);
+        });
+      } else if (req.body.image) {
+        var params = [req.body.image, req.body.id_users];
+        models.profiles.putImage(params, function(err, results) {
+          if(err) {
+            console.log('error: ', err);
+          }
+          res.sendStatus(200);
+        });
+      } else if (req.body.status) {
+        var params = [req.body.status, req.body.id_users];
+        models.profiles.putImage(params, function(err, results) {
+          if(err) {
+            console.log('error: ', err);
+          }
+          res.sendStatus(200);
+        });
+      }
     }
   },
   status: {

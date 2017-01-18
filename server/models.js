@@ -81,8 +81,20 @@ module.exports = {
         callback(err, results);
       });
     },
-    put: function(params, callback) {
+    putPush: function(params, callback) {
       var queryStr = 'UPDATE profiles SET push = ? WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
+    putImage: function(params, callback) {
+      var queryStr = 'UPDATE profiles SET image = ? WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
+    putStatus: function(params, callback) {
+      var queryStr = 'UPDATE profiles SET status = ? WHERE id_users = ?';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
