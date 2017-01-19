@@ -186,13 +186,6 @@ module.exports = {
           res.sendStatus(200);
         });
       }
-      var params = [req.body.push, req.body.id_users];
-      models.profiles.put(params, function(err, results) {
-        if(err) {
-          res.sendStatus(400);
-        }
-        res.sendStatus(200);
-      });
     }
   },
 
