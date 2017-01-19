@@ -35,7 +35,7 @@ module.exports = {
           res.sendStatus(400);
         }
         var validate = sha512(req.query.password, results[0].salt);
-        if(validate.passwordHash === results[0].hash){
+        if (validate.passwordHash === results[0].hash){
           res.json(results);
         } else {
           res.sendStatus(401);
@@ -110,7 +110,7 @@ module.exports = {
     post: function(req, res) {
       var params = [req.body.id_users, req.body.name, req.body.name, req.body.enter_time, req.body.exit_time];
       models.categoryStats.post(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.sendStatus(201);
@@ -119,7 +119,7 @@ module.exports = {
     put: function(req, res) {
       var params = [req.body.exit_time, req.body.id_users, req.body.name];
       models.categoryStats.put(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.sendStatus(200);
@@ -129,18 +129,19 @@ module.exports = {
 
   profiles: {
     get: function(req, res) {
-      var params = [req.query.id_users];
-      models.profiles.get(params, function(err, results) {
-        if(err) {
-          res.sendStatus(400);
-        }
-        res.json(results);
-      });
+        var params = [req.query.id_users];
+        models.profiles.get(params, function(err, results) {
+          if (err) {
+            res.sendStatus(400);
+          }
+          res.json(results);
+        });
+      }
     },
     post: function (req, res) {
       var params = [req.body.id_users, req.body.first_name, req.body.last_name, req.body.gender, req.body.city, req.body.state, req.body.push];
       models.profiles.post(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.sendStatus(201);
@@ -149,7 +150,7 @@ module.exports = {
     put: function(req, res) {
       var params = [req.body.push, req.body.id_users];
       models.profiles.put(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.sendStatus(200);
@@ -161,7 +162,7 @@ module.exports = {
     get: function(req, res) {
       var params = [req.query.id_users];
       models.status.get(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.json(results);
@@ -170,7 +171,7 @@ module.exports = {
     post: function(req, res) {
       var params = [req.body.id_users, req.body.status];
       models.status.post(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.sendStatus(201);
@@ -182,7 +183,7 @@ module.exports = {
     get: function(req, res) {
       var params = [req.query.id_users];
       models.images.get(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.json(results);
@@ -191,7 +192,7 @@ module.exports = {
     post: function(req, res) {
       var params = [req.body.id_users, req.body.image];
       models.images.post(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.sendStatus(201);
@@ -203,7 +204,7 @@ module.exports = {
     get: function(req, res) {
       var params = [req.query.interest];
       models.interests.get(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.json(results);
@@ -212,7 +213,7 @@ module.exports = {
     post: function(req, res) {
       var params = [req.body.id_users, req.body.interest];
       models.interests.post(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.sendStatus(201);
@@ -224,7 +225,7 @@ module.exports = {
     get: function(req, res) {
       var params = [req.query.id_users];
       models.matches.get(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.json(results);
@@ -233,15 +234,11 @@ module.exports = {
     post: function(req, res) {
       var params = [req.body.id_users, req.body.match_id];
       models.matches.post(params, function(err, results) {
-        if(err) {
+        if (err) {
           res.sendStatus(400);
         }
         res.sendStatus(201);
       })
     }
   },
-
-  populateDatabase: populateDatabase,
-  
-  mockData: mockData
 };
