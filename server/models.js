@@ -49,7 +49,7 @@ module.exports = {
 
   categoryStats: {
     get: function(params, callback) {
-      var queryStr = 'SELECT * FROM categoryStats WHERE id_users = ?';
+      var queryStr = 'SELECT category, SUM(exit_time) - SUM(enter_time) AS time_spent FROM categoryStats WHERE id_users = ? GROUP BY category';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
@@ -160,6 +160,4 @@ module.exports = {
       });
     }
   }
-
-
 };
