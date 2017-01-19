@@ -73,15 +73,16 @@ module.exports = {
             res.sendStatus(201);
           });
         } else if (req.body.geolocation.action === 'EXIT') {
-          models.categoryStats.put([time, req.body.id_users, req.body.geolocation.identifier], function(err, results) {
-            res.sendStatus(200);
-          });
+            models.categoryStats.put([time, req.body.id_users, req.body.geolocation.identifier], function(err, results) {
+              res.sendStatus(200);
+            });
+          }
       } else {
         var params = [req.query.id_users, time, req.body.location.coords.latitude, req.body.location.coords.longitude];
         models.coordinates.post(params, function(err, results) {
           if (err) {
             console.log('error: ', err);
-          }
+          } 
           res.sendStatus(201);
         });
       }
@@ -279,7 +280,11 @@ module.exports = {
     }
   },
 
-  populateDatabase: populateDatabase,
+  // populateDatabase: populateDatabase,
   
-  mockData: mockData
-};
+  // mockData: mockData
+}
+
+
+
+
