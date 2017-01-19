@@ -36,7 +36,7 @@ describe('server', function() {
         password: 'password',
         address: '1600 Penn Ave',
         email: 'mike@mike.com',
-        createdAt: '[0]4/[19]96/15'
+        createdAt: null
       }
       chai.request(server).post('/users').send(params).end((err, res) => {
         expect(res.status).to.equal(201);
@@ -44,7 +44,7 @@ describe('server', function() {
     });
     it('should return 200 when POST request sent to /coordinates', function() {
       var params = {
-        id_users: 1,
+        id_users: null,
         time: 1484083067,
         lat: 41.015137,
         long: 28.979530
@@ -55,7 +55,7 @@ describe('server', function() {
     });
     it('should return 200 when POST request sent to /locations', function() {
       var params = {
-        id_users: 1,
+        id_users: null,
         name: 'Burger shop',
         category: 'restaurants',
         lat: 33.394266,
