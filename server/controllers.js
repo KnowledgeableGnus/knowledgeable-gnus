@@ -76,11 +76,6 @@ module.exports = {
           models.categoryStats.put([time, req.body.id_users, req.body.geolocation.identifier], function(err, results) {
             res.sendStatus(200);
           });
-      var params = [req.body.id_users, req.body.time, req.body.lat, req.body.long];
-      models.coordinates.post(params, function(err, results) {
-        if (err) {
-          res.sendStatus(400);
-        }
       } else {
         var params = [req.query.id_users, time, req.body.location.coords.latitude, req.body.location.coords.longitude];
         models.coordinates.post(params, function(err, results) {
