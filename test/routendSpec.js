@@ -231,4 +231,32 @@ describe('server', function() {
       });
     });
   })
+
+
+  describe('PUT', function() {
+
+    it('should return 200 when PUT request sent to /categoryStats', function(done) {
+      var params = {
+        exit_time: 1484083070,
+        id_users: 1,
+        name: 'Burger Shop'
+      }
+      chai.request(server).put('/categoryStats').send(params).end((err, res) => {
+        expect(res.status).to.equal(200);
+        done();
+      });
+    });
+
+    it('should return 200 when PUT request sent to /profiles', function(done) {
+      var params = {
+        image: 'this is an image url',
+        id_users: 1
+      }
+      chai.request(server).put('/profiles').send(params).end((err, res) => {
+        expect(res.status).to.equal(200);
+        done();
+      })
+    });
+
+  })
 });
