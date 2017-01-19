@@ -18,8 +18,12 @@ app.use(morgan('dev'));
 app.use('/', router);
 
 app.get('/', function(req, res) {
+//set up for when there are static files
+//app.use(express.static(__dirname, '..', /client));
+
   res.send('Welcome to Routend');
 });
+
 
 app.listen(app.get('port'));
 

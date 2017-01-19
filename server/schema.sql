@@ -96,6 +96,8 @@ CREATE TABLE `profiles` (
   `gender` VARCHAR(60),
   `city` VARCHAR(60),
   `state` VARCHAR(60),
+  `image` VARCHAR(2083),
+  `status` VARCHAR(140)
   `push` BOOLEAN,
   PRIMARY KEY (`id`)
 );

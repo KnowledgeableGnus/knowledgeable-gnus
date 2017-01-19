@@ -1,6 +1,7 @@
 var models = require('./models.js');
 var geo = require('geo-helpers');
 var crypto = require('crypto');
+var moment = require('moment');
 
 
 var genRandomString = function(length) {
@@ -65,13 +66,30 @@ module.exports = {
       });
     },
     post: function(req, res) {
+      var time = moment(req.body.location.coords.timestamp).unix();
+      if(req.body.geolocation !== undefined) {
+        if(req.body.geolocation.action === 'ENTER') {
+          models.categoryStats.post([req.body.id_users, req.body.geolocation.identifier, req.body.identifier, time, 0], function(err, results) {
+            res.sendStatus(201);
+          });
+        } else if (req.body.geolocation.action === 'EXIT') {
+          models.categoryStats.put([time, req.body.id_users, req.body.geolocation.identifier], function(err, results) {
+            res.sendStatus(200);
+          });
       var params = [req.body.id_users, req.body.time, req.body.lat, req.body.long];
       models.coordinates.post(params, function(err, results) {
         if (err) {
           res.sendStatus(400);
         }
-        res.sendStatus(201);
-      });
+      } else {
+        var params = [req.query.id_users, time, req.body.location.coords.latitude, req.body.location.coords.longitude];
+        models.coordinates.post(params, function(err, results) {
+          if (err) {
+            console.log('error: ', err);
+          }
+          res.sendStatus(201);
+        });
+      }
     }
   },
 
@@ -138,7 +156,7 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      var params = [req.body.id_users, req.body.first_name, req.body.last_name, req.body.gender, req.body.city, req.body.state, req.body.push];
+      var params = [req.body.id_users, req.body.first_name, req.body.last_name, req.body.gender, req.body.city, req.body.state, req.body.image, req.body.status, req.body.push];
       models.profiles.post(params, function(err, results) {
         if(err) {
           res.sendStatus(400);
@@ -147,6 +165,31 @@ module.exports = {
       });
     },
     put: function(req, res) {
+      if(req.body.push) {
+        var params = [req.body.push, req.body.id_users];
+        models.profiles.putPush(params, function(err, results) {
+          if(err) {
+            console.log('error: ', err);
+          }
+          res.sendStatus(200);
+        });
+      } else if (req.body.image) {
+        var params = [req.body.image, req.body.id_users];
+        models.profiles.putImage(params, function(err, results) {
+          if(err) {
+            console.log('error: ', err);
+          }
+          res.sendStatus(200);
+        });
+      } else if (req.body.status) {
+        var params = [req.body.status, req.body.id_users];
+        models.profiles.putImage(params, function(err, results) {
+          if(err) {
+            console.log('error: ', err);
+          }
+          res.sendStatus(200);
+        });
+      }
       var params = [req.body.push, req.body.id_users];
       models.profiles.put(params, function(err, results) {
         if(err) {
