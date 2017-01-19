@@ -67,13 +67,13 @@ module.exports = {
     },
     post: function(req, res) {
       var time = moment(req.body.location.coords.timestamp).unix();
-      if(req.body.geolocation !== undefined) {
-        if(req.body.geolocation.action === 'ENTER') {
-          models.categoryStats.post([req.body.id_users, req.body.geolocation.identifier, req.body.identifier, time, 0], function(err, results) {
+      if(req.body.location.geolocation !== undefined) {
+        if(req.body.location.geolocation.action === 'ENTER') {
+          models.categoryStats.post([req.body.id_users, req.body.location.geolocation.identifier, req.body.location.geolocation.identifier, time, 0], function(err, results) {
             res.sendStatus(201);
           });
-        } else if (req.body.geolocation.action === 'EXIT') {
-            models.categoryStats.put([time, req.body.id_users, req.body.geolocation.identifier], function(err, results) {
+        } else if (req.body.location.geolocation.action === 'EXIT') {
+            models.categoryStats.put([time, req.body.id_users, req.body.location.geolocation.identifier], function(err, results) {
               res.sendStatus(200);
             });
           }
