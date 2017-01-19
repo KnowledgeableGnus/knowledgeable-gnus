@@ -66,7 +66,7 @@ describe('server', function() {
     });
     it('should return 201 when POST request sent to /coordinates', function() {
       var params = {
-        id_users: 1,
+        id_users: null,
         time: 1484083067,
         lat: 41.015137,
         long: 28.979530
@@ -77,7 +77,7 @@ describe('server', function() {
     });
     it('should return 201 when POST request sent to /locations', function() {
       var params = {
-        id_users: 1,
+        id_users: null,
         name: 'Burger shop',
         category: 'restaurants',
         lat: 33.394266,
