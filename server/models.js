@@ -76,13 +76,25 @@ module.exports = {
       });
     },
     post: function(params, callback) {
-      var queryStr = 'INSERT INTO profiles(id_users, first_name, last_name, gender, city, state, push) VALUE (?, ?, ?, ?, ?, ?, ?)';
+      var queryStr = 'INSERT INTO profiles(id_users, first_name, last_name, gender, city, state, image, status, push) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?)';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
     },
-    put: function(params, callback) {
+    putPush: function(params, callback) {
       var queryStr = 'UPDATE profiles SET push = ? WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
+    putImage: function(params, callback) {
+      var queryStr = 'UPDATE profiles SET image = ? WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
+    putStatus: function(params, callback) {
+      var queryStr = 'UPDATE profiles SET status = ? WHERE id_users = ?';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });
@@ -136,7 +148,7 @@ module.exports = {
 
   matches: {
     get: function(params, callback) {
-      var queryStr = 'SELECT match_id FROM matches WHERE id_users = ?';
+      var queryStr = 'SELECT * FROM profiles WHERE id_users IN (SELECT match_id FROM matches WHERE id_users = ?)';
       db.query(queryStr, params, function(err, results) {
         callback(err, results);
       });

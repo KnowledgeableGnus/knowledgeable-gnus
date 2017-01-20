@@ -18,10 +18,13 @@ app.use(morgan('dev'));
 app.use('/', router);
 
 app.get('/', function(req, res) {
+
   res.send('Welcome to Routend');
 });
 
+
 app.listen(app.get('port'));
+console.log('Running on port ' + app.get('port'));
 
 //Uncomment to fill database with dummy data on server start
 //helpers.mockData(37.773972, -122.431297, 1483812798)
