@@ -165,7 +165,7 @@ module.exports = {
         if(err) {
           res.sendStatus(400);
         }
-        res.sendStatus(200);
+        res.sendStatus(201);
       });
     },
     put: function(req, res) {
