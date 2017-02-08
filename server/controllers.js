@@ -50,7 +50,15 @@ module.exports = {
         if (err) {
           res.sendStatus(400);
         }
-        res.sendStatus(201);
+        models.users.get([req.body.email], function(err, results) {
+          var id = results[0].id;
+          models.profiles.post([id, null, null, null, null, null, null, null, null], function(err, results) {
+            if(err) {
+              res.sendStatus(400);
+            }
+            res.sendStatus(201);
+          });
+        });
       });
     }
   },
@@ -67,13 +75,13 @@ module.exports = {
     },
     post: function(req, res) {
       var time = moment(req.body.location.coords.timestamp).unix();
-      if(req.body.geolocation !== undefined) {
-        if(req.body.geolocation.action === 'ENTER') {
-          models.categoryStats.post([req.body.id_users, req.body.geolocation.identifier, req.body.identifier, time, 0], function(err, results) {
+      if(req.body.location.geolocation !== undefined) {
+        if(req.body.location.geolocation.action === 'ENTER') {
+          models.categoryStats.post([req.body.id_users, req.body.location.geolocation.identifier, req.body.location.geolocation.identifier, time, 0], function(err, results) {
             res.sendStatus(201);
           });
-        } else if (req.body.geolocation.action === 'EXIT') {
-            models.categoryStats.put([time, req.body.id_users, req.body.geolocation.identifier], function(err, results) {
+        } else if (req.body.location.geolocation.action === 'EXIT') {
+            models.categoryStats.put([time, req.body.id_users, req.body.location.geolocation.identifier], function(err, results) {
               res.sendStatus(200);
             });
           }
@@ -161,7 +169,15 @@ module.exports = {
       });
     },
     put: function(req, res) {
-      if(req.body.push) {
+      if(req.body.first_name && req.body.last_name) {
+        var params = [req.body.first_name, req.body.last_name, req.body.gender, req.body.city, req.body.state, req.body.image, req.body.status, req.body.push, req.body.id_users];
+        models.profiles.put(params, function(err, results) {
+          if(err) {
+            res.sendStatus(400);
+          } 
+          res.sendStatus(200);
+        });
+      } else if(req.body.push && !req.body.image) {
         var params = [req.body.push, req.body.id_users];
         models.profiles.putPush(params, function(err, results) {
           if(err) {
@@ -169,7 +185,7 @@ module.exports = {
           }
           res.sendStatus(200);
         });
-      } else if (req.body.image) {
+      } else if (req.body.image && !req.body.status) {
         var params = [req.body.image, req.body.id_users];
         models.profiles.putImage(params, function(err, results) {
           if(err) {
@@ -177,7 +193,7 @@ module.exports = {
           }
           res.sendStatus(200);
         });
-      } else if (req.body.status) {
+      } else if (req.body.status && ! req.body.image) {
         var params = [req.body.status, req.body.id_users];
         models.profiles.putStatus(params, function(err, results) {
           if(err) {

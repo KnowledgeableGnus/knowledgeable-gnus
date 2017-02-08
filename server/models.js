@@ -81,6 +81,12 @@ module.exports = {
         callback(err, results);
       });
     },
+    put: function(params, callback) {
+      var queryStr = 'UPDATE profiles SET first_name = ?, last_name = ?, gender = ?, city = ?, state = ?, image = ?, status = ?, push = ? WHERE id_users = ?';
+      db.query(queryStr, params, function(err, results) {
+        callback(err, results);
+      });
+    },
     putPush: function(params, callback) {
       var queryStr = 'UPDATE profiles SET push = ? WHERE id_users = ?';
       db.query(queryStr, params, function(err, results) {
